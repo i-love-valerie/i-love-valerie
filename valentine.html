@@ -25,7 +25,7 @@
             margin: auto;
             padding: 20px;
         }
-        .prank, .message, .video-section {
+        .prank, .message, .video-section, .home-section {
             background: white;
             padding: 20px;
             border-radius: 10px;
@@ -94,6 +94,12 @@
                 Your browser does not support the video tag.
             </video>
         </div>
+
+        <div class="home-section hidden" id="home">
+            <h2>Return to Home</h2>
+            <p>Click below to go back to the main page.</p>
+            <button onclick="goHome()">Go to Home</button>
+        </div>
     </div>
     
     <script>
@@ -126,11 +132,15 @@
                     document.getElementById("prank3").classList.add("hidden");
                     document.getElementById("message").classList.remove("hidden");
                     document.getElementById("video").classList.remove("hidden");
+                    document.getElementById("home").classList.remove("hidden");
                 }, 1000);
             } else {
                 result.innerHTML = "Nope! Try again 😆";
                 result.style.color = "red";
             }
+        }
+        function goHome() {
+            window.location.href = "index.html";
         }
     </script>
 </body>
