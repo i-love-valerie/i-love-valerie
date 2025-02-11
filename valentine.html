@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day, Valerie! ❤️</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #ffe6f2;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #ff66b2;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .prank, .message, .video-section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        #mathAnswer {
+            height: 25px;
+            font-size: 16px;
+            padding: 5px;
+            border: 2px solid #d63384;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>Happy Valentine's Day, Valerie! ❤️</header>
+    <div class="container">
+        
+        <div class="prank" id="prank1">
+            <h2>Can You Click This <span id="trickText">Button</span>? 😈</h2>
+            <button id="movingButton">Click Me</button>
+            <p id="prankMessage1" class="hidden">Nice try! Try again 😆</p>
+        </div>
+
+        <div class="prank hidden" id="prank2">
+            <h2>Find the Invisible Button 👀</h2>
+            <button id="invisibleButton" style="opacity: 0;">Click Me</button>
+        </div>
+
+        <div class="prank hidden" id="prank3">
+            <h2>Last Challenge: Solve This!</h2>
+            <p>Who is the most precious person in the world? Note: it starts with "V".</p>
+            <p id="hintText" class="hidden">Hint: It consists of 6 letters and the last five letters are bryan</p>
+            <input type="text" id="mathAnswer" placeholder="Your answer">
+            <button onclick="checkMathAnswer()">Check</button>
+            <button onclick="showHint()">Show Hint</button>
+            <p id="mathResult"></p>
+        </div>
+
+        <div class="message hidden" id="message">
+            <h2>My Love Letter to You ❤️</h2>
+            <p>Valerie, you are the most beautiful, kind, and wonderful person in my life. Every moment with you is a treasure, and I cherish you more than words can say. Happy Valentine's Day, my love! 💖</p>
+        </div>
+
+        <div class="video-section hidden" id="video">
+            <h2>A Special Video Just for You 🎥</h2>
+            <video width="100%" controls>
+                <source src="video/valentine.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+    
+    <script>
+        function showHint() {
+            document.getElementById("hintText").classList.remove("hidden");
+        }
+        document.getElementById("movingButton").addEventListener("mouseover", function() {
+            this.style.position = "absolute";
+            this.style.left = Math.min(Math.random() * window.innerWidth, window.innerWidth - 100) + "px";
+            this.style.top = Math.min(Math.random() * window.innerHeight, window.innerHeight - 50) + "px";
+        });
+        document.getElementById("movingButton").addEventListener("click", function() {
+            document.getElementById("prankMessage1").classList.remove("hidden");
+        });
+        document.getElementById("trickText").addEventListener("click", function() {
+            document.getElementById("prank1").classList.add("hidden");
+            document.getElementById("prank2").classList.remove("hidden");
+        });
+        document.getElementById("invisibleButton").addEventListener("click", function() {
+            document.getElementById("prank2").classList.add("hidden");
+            document.getElementById("prank3").classList.remove("hidden");
+        });
+        function checkMathAnswer() {
+            var userAnswer = document.getElementById("mathAnswer").value.toLowerCase();
+            var result = document.getElementById("mathResult");
+            if (userAnswer == "vbryan") {
+                result.innerHTML = "Correct! ❤️";
+                result.style.color = "green";
+                setTimeout(() => {
+                    document.getElementById("prank3").classList.add("hidden");
+                    document.getElementById("message").classList.remove("hidden");
+                    document.getElementById("video").classList.remove("hidden");
+                }, 1000);
+            } else {
+                result.innerHTML = "Nope! Try again 😆";
+                result.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
