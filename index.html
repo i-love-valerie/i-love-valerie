@@ -8,13 +8,13 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background: #ffe6f2;
+            background: #e6f7ff; /* Light Blue Background */
             color: #d63384;
             margin: 0;
             padding: 0;
         }
         header {
-            background: #ff66b2;
+            background: #4da6ff; /* Soft Blue */
             padding: 20px;
             font-size: 24px;
             font-weight: bold;
@@ -45,7 +45,7 @@
             border-radius: 10px;
         }
         footer {
-            background: #ff66b2;
+            background: #4da6ff; /* Matching Footer */
             padding: 10px;
             margin-top: 20px;
             color: white;
@@ -53,7 +53,7 @@
         .navigation {
             display: flex;
             justify-content: center;
-            background: #ff99cc;
+            background: #80c1ff; /* Slightly lighter blue */
             padding: 10px;
         }
         .navigation a {
@@ -65,7 +65,7 @@
             transition: transform 0.3s ease-in-out;
         }
         .navigation a:hover {
-            background: #ff66b2;
+            background: #4da6ff;
             border-radius: 5px;
             transform: rotate(5deg);
         }
@@ -73,7 +73,7 @@
             display: inline-block;
             margin: 10px;
             padding: 15px 25px;
-            background: #ff66b2;
+            background: #4da6ff;
             color: white;
             text-decoration: none;
             font-weight: bold;
@@ -128,14 +128,43 @@
                 <img src="image/us11.jpg" alt="us 11">
                 <img src="image/us12.jpg" alt="us 12">
             </div>
-            <p>...And many more beautiful memories to come! 💖</p>
+            <p>...And many more beautiful memories to come! 💖</p>            
         </div>
+
+        <div id="songs" class="special-section">
+            <h3>Songs that remind me of you:</h3>
+            <p>Here are three songs that always remind me of you:</p>
+            
+            <!-- Song: Sudden Shower -->
+            <iframe src="https://open.spotify.com/embed/track/1OhIn0L6iofnk5bjalWfHq" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+            <!-- Song: The First Snow -->
+            <iframe src="https://open.spotify.com/embed/track/2VNpT9fRk1kyksT0S4coZR" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+            <!-- Song: Snowman -->
+            <iframe src="https://open.spotify.com/embed/track/7uoFMmxln0GPXQ0AcCBXRq" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+        </div>
+
         
         <div class="special-section">
             <h2>Special Pages</h2>
             <div class="special-buttons">
                 <a href="valentine.html">Valentine</a>
-                <!-- <a href="#">Coming Soon</a> -->
+                <a href="birthday.html">Birthday</a>
+                <!-- <a href="birthday.html" onclick="return checkBirthday()">Birthday</a>
+                <script>
+                    function checkBirthday() {
+                        const today = new Date();
+                        const birthday = new Date(today.getFullYear(), 1, 26); // Feb 26
+                
+                        if (today < birthday) {
+                            alert("The Birthday page is locked until February 26! 🎂 Come back later.");
+                            return false; // Prevents redirection
+                        }
+                        return true; // Allows redirection if it's Feb 26+
+                    }
+                </script> -->
+                
             </div>
         </div>
 

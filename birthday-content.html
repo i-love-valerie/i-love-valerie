@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, Valerie! 🎂</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #e6f7ff;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #4da6ff;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+        .hidden {
+            display: none;
+        }
+        #gift-box {
+            width: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        #gift-box:hover {
+            transform: scale(1.1);
+        }
+        .candles {
+            cursor: pointer;
+            font-size: 30px;
+        }
+        .note {
+            display: none;
+            background: #ffcccb;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        .note-container {
+            background: #ffcccb;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            min-height: 100px;
+        }
+        .buttons {
+            margin-top: 10px;
+        }
+        .home-section {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>🎉 Happy Birthday, Valerie! 🎂</header>
+
+    <div class="container">
+
+        <!-- Virtual Birthday Card -->
+        <div class="section">
+            <h2>💌 Open Your Birthday Card</h2>
+            <button onclick="showCard()">Open Card</button>
+            <p id="birthday-message" class="hidden">Happy Birthday, valeri sayanggggggg, buat ucapannya tonton video di bawah ya :D, lovee youu !!</p>
+        </div>
+
+        <!-- Special Birthday Video -->
+        <div class="section">
+            <h2>🎥 A Special Video for You</h2>
+            <video width="100%" controls>
+                <source src="video/valerie_birthday.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <!-- Birthday Playlist -->
+        <div class="section">
+            <h2>🎶 Songs for Your Special Day</h2>
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdCwYDw2NVXM" width="300" height="380" frameborder="0" allow="encrypted-media"></iframe>
+        </div>
+
+        <!-- Virtual Gift -->
+        <div class="section">
+            <h2>🎁 Click to Open Your Gift</h2>
+            <img id="gift-box" src="image/gift.jpg" onclick="revealGift()" alt="Gift Box">
+            <p id="gift-message" class="hidden">✨ It's not here, just wait :b</p>
+        </div>
+
+        <!-- Blow Out the Candles -->
+        <div class="section">
+            <h2>🎂 Blow Out the Candles!</h2>
+            <p>Click the candles to blow them out!</p>
+            <p class="candles" onclick="blowCandles()">🕯️🕯️🕯️</p>
+            <p id="candle-message" class="hidden">🎉 Make a wish! 🎂</p>
+        </div>
+
+        <!-- Weekly Notes Section -->
+        <div class="section">
+            <h2>📜 Weekly Notes</h2>
+            <p>Click "Next" or "Previous" to navigate.</p>
+            <div id="note-container" class="note-container">Loading...</div>
+            <p id="lock-message" style="color: red; display: none;">🚫 This week's note is locked. Come back later! ⏳</p>
+            <div class="buttons">
+                <button id="prev-btn" onclick="changeWeek(-1)">⬅ Previous</button>
+                <button id="next-btn" onclick="changeWeek(1)">Next ➡</button>
+            </div>
+        </div>
+
+        <!-- Home Button Section -->
+        <div class="section">
+            <div class="home-section">
+                <h2>Return to Home</h2>
+                <p>Click below to go back to the main page.</p>
+                <button onclick="goHome()">Go to Home</button>
+            </div>
+        </div>
+
+        <script>
+            let notes = [];
+            let currentWeekIndex = 0;
+    
+            async function loadNotes() {
+                const response = await fetch("weekly_notes.csv"); // Load CSV file
+                const data = await response.text();
+                const lines = data.split("\n").slice(1); // Skip header row
+    
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+    
+                lines.forEach(line => {
+                    const parts = line.split(",");
+                    if (parts.length < 2) return; // Skip invalid rows
+                    
+                    const weekStart = new Date(parts[0].trim());
+                    const noteText = parts[1].trim();
+    
+                    notes.push({
+                        date: weekStart,
+                        text: noteText
+                    });
+    
+                    if (weekStart <= today) {
+                        currentWeekIndex = notes.length - 1; // Set current week index to last unlocked week
+                    }
+                });
+    
+                updateNoteDisplay();
+            }
+    
+            function updateNoteDisplay() {
+                const noteContainer = document.getElementById("note-container");
+                const lockMessage = document.getElementById("lock-message");
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+    
+                if (notes.length === 0) {
+                    noteContainer.innerHTML = "No notes available.";
+                    return;
+                }
+    
+                const currentNote = notes[currentWeekIndex];
+                const weekStart = currentNote.date;
+                const noteText = currentNote.text;
+
+                // Format date as YYYY-MM-DD (removing weekday)
+                const formattedDate = `${weekStart.getFullYear()}-${(weekStart.getMonth() + 1).toString().padStart(2, '0')}-${weekStart.getDate().toString().padStart(2, '0')}`;
+
+                if (weekStart <= today) {
+                    noteContainer.innerHTML = `<strong>Week Starting From: ${formattedDate}</strong><br><br> ${noteText}`;
+                    lockMessage.style.display = "none";
+                } else {
+                    noteContainer.innerHTML = `<strong>Week Starting From: ${formattedDate}</strong>`;
+                    lockMessage.style.display = "block";
+                }
+            }
+    
+            function changeWeek(direction) {
+                const newIndex = currentWeekIndex + direction;
+    
+                if (newIndex >= 0 && newIndex < notes.length) {
+                    currentWeekIndex = newIndex;
+                    updateNoteDisplay();
+                }
+            }
+    
+            loadNotes();
+        </script>
+
+    </div>
+
+    <script>
+
+        // Virtual Card Reveal
+        function showCard() {
+            document.getElementById("birthday-message").classList.remove("hidden");
+        }
+
+        // Gift Reveal
+        function revealGift() {
+            document.getElementById("gift-message").classList.remove("hidden");
+        }
+
+        // Blow Out the Candles
+        function blowCandles() {
+            document.querySelector(".candles").innerHTML = "✨✨✨";
+            document.getElementById("candle-message").classList.remove("hidden");
+        }
+
+        function goHome() {
+            window.location.href = "index.html";
+        }
+
+    </script>
+
+</body>
+</html>

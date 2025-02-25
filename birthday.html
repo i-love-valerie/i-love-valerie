@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown to Valerie's Birthday 🎂</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #e6f7ff;
+            color: #d63384;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 50px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+        #countdown {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #ff66b2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s ease-in-out;
+            display: none; /* Initially hidden */
+        }
+        button:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section">
+            <h2>🎉 Countdown to Valerie's Birthday! 🎂</h2>
+            <p id="countdown"></p>
+            <p id="birthday-message" style="display:none;">🎂 Happy Birthday, Valerie! 🎈</p>
+            <button id="enter-page" onclick="enterBirthdayPage()">Enter Birthday Page 🎁</button>
+        </div>
+    </div>
+
+    <script>
+        function updateCountdown() {
+            const now = new Date();
+            const birthday = new Date(now.getFullYear(), 1, 26, 0, 0, 0); // Feb 26, 12:00 AM
+            const timeDiff = birthday - now;
+
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = 
+                    `${days}d ${hours}h ${minutes}m ${seconds}s left until Valerie's Birthday! 🎉`;
+            } else {
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("birthday-message").style.display = "block";
+                document.getElementById("enter-page").style.display = "inline-block";
+            }
+        }
+
+        function enterBirthdayPage() {
+            window.location.href = "birthday-content.html"; // Redirect to the full birthday page
+        }
+
+        // Update countdown every second
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+</body>
+</html>
