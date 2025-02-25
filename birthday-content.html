@@ -9,7 +9,7 @@
             font-family: Arial, sans-serif;
             text-align: center;
             background: #e6f7ff;
-            color: #d63384;
+            color: #0056b3;
             margin: 0;
             padding: 0;
         }
@@ -34,7 +34,7 @@
         }
         button {
             padding: 10px 20px;
-            background: #ff66b2;
+            background: #66b2ff;
             color: white;
             border: none;
             border-radius: 10px;
@@ -81,6 +81,15 @@
         .home-section {
             margin-top: 20px;
         }
+        .video-container {
+        display: flex;
+        justify-content: center;
+        }
+        .video-container video {
+            width: 100%;
+            max-width: 320px; /* Adjust this as needed */
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -92,29 +101,31 @@
         <div class="section">
             <h2>💌 Open Your Birthday Card</h2>
             <button onclick="showCard()">Open Card</button>
-            <p id="birthday-message" class="hidden">Happy Birthday, valeri sayanggggggg, buat ucapannya tonton video di bawah ya :D, lovee youu !!</p>
+            <p id="birthday-message" class="hidden">Happy birthday, valeri sayanggggggg, buat ucapannya tonton video di bawah ya :D, lovee youu !!</p>
         </div>
 
         <!-- Special Birthday Video -->
         <div class="section">
             <h2>🎥 A Special Video for You</h2>
-            <video width="100%" controls>
-                <source src="video/valerie_birthday.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+            <div class="video-container">
+                <video controls>
+                    <source src="video/valerie_birthday.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         </div>
 
         <!-- Birthday Playlist -->
         <div class="section">
             <h2>🎶 Songs for Your Special Day</h2>
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdCwYDw2NVXM" width="300" height="380" frameborder="0" allow="encrypted-media"></iframe>
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DXdCwYDw2NVXM" width="300" height="450" frameborder="0" allow="encrypted-media"></iframe>
         </div>
 
         <!-- Virtual Gift -->
         <div class="section">
             <h2>🎁 Click to Open Your Gift</h2>
             <img id="gift-box" src="image/gift.jpg" onclick="revealGift()" alt="Gift Box">
-            <p id="gift-message" class="hidden">✨ It's not here, just wait :b</p>
+            <p id="gift-message" class="hidden">✨ It's not here, just wait tomorrow, i mean later :b</p>
         </div>
 
         <!-- Blow Out the Candles -->
